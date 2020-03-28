@@ -1,0 +1,465 @@
+// 256-bit Royal Road Function with five pipeline stages latency (overally 6 stages)
+
+// Dependencies
+`include "disciplines.vams" // Natures and disciplines
+
+// Royal road fitness function module
+module	RoyalRoad(Req, Ready, Ack, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63, Data64, Data65, Data66, Data67, Data68, Data69, Data70, Data71, Data72, Data73, Data74, Data75, Data76, Data77, Data78, Data79, Data80, Data81, Data82, Data83, Data84, Data85, Data86, Data87, Data88, Data89, Data90, Data91, Data92, Data93, Data94, Data95, Data96, Data97, Data98, Data99, Data100, Data101, Data102, Data103, Data104, Data105, Data106, Data107, Data108, Data109, Data110, Data111, Data112, Data113, Data114, Data115, Data116, Data117, Data118, Data119, Data120, Data121, Data122, Data123, Data124, Data125, Data126, Data127, Data128, Data129, Data130, Data131, Data132, Data133, Data134, Data135, Data136, Data137, Data138, Data139, Data140, Data141, Data142, Data143, Data144, Data145, Data146, Data147, Data148, Data149, Data150, Data151, Data152, Data153, Data154, Data155, Data156, Data157, Data158, Data159, Data160, Data161, Data162, Data163, Data164, Data165, Data166, Data167, Data168, Data169, Data170, Data171, Data172, Data173, Data174, Data175, Data176, Data177, Data178, Data179, Data180, Data181, Data182, Data183, Data184, Data185, Data186, Data187, Data188, Data189, Data190, Data191, Data192, Data193, Data194, Data195, Data196, Data197, Data198, Data199, Data200, Data201, Data202, Data203, Data204, Data205, Data206, Data207, Data208, Data209, Data210, Data211, Data212, Data213, Data214, Data215, Data216, Data217, Data218, Data219, Data220, Data221, Data222, Data223, Data224, Data225, Data226, Data227, Data228, Data229, Data230, Data231, Data232, Data233, Data234, Data235, Data236, Data237, Data238, Data239, Data240, Data241, Data242, Data243, Data244, Data245, Data246, Data247, Data248, Data249, Data250, Data251, Data252, Data253, Data254, Data255, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8);
+
+// Declarations
+input	Req, Ready, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63, Data64, Data65, Data66, Data67, Data68, Data69, Data70, Data71, Data72, Data73, Data74, Data75, Data76, Data77, Data78, Data79, Data80, Data81, Data82, Data83, Data84, Data85, Data86, Data87, Data88, Data89, Data90, Data91, Data92, Data93, Data94, Data95, Data96, Data97, Data98, Data99, Data100, Data101, Data102, Data103, Data104, Data105, Data106, Data107, Data108, Data109, Data110, Data111, Data112, Data113, Data114, Data115, Data116, Data117, Data118, Data119, Data120, Data121, Data122, Data123, Data124, Data125, Data126, Data127, Data128, Data129, Data130, Data131, Data132, Data133, Data134, Data135, Data136, Data137, Data138, Data139, Data140, Data141, Data142, Data143, Data144, Data145, Data146, Data147, Data148, Data149, Data150, Data151, Data152, Data153, Data154, Data155, Data156, Data157, Data158, Data159, Data160, Data161, Data162, Data163, Data164, Data165, Data166, Data167, Data168, Data169, Data170, Data171, Data172, Data173, Data174, Data175, Data176, Data177, Data178, Data179, Data180, Data181, Data182, Data183, Data184, Data185, Data186, Data187, Data188, Data189, Data190, Data191, Data192, Data193, Data194, Data195, Data196, Data197, Data198, Data199, Data200, Data201, Data202, Data203, Data204, Data205, Data206, Data207, Data208, Data209, Data210, Data211, Data212, Data213, Data214, Data215, Data216, Data217, Data218, Data219, Data220, Data221, Data222, Data223, Data224, Data225, Data226, Data227, Data228, Data229, Data230, Data231, Data232, Data233, Data234, Data235, Data236, Data237, Data238, Data239, Data240, Data241, Data242, Data243, Data244, Data245, Data246, Data247, Data248, Data249, Data250, Data251, Data252, Data253, Data254, Data255;
+
+output	Ack, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8;
+
+electrical	Req, Ready, Ack, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63, Data64, Data65, Data66, Data67, Data68, Data69, Data70, Data71, Data72, Data73, Data74, Data75, Data76, Data77, Data78, Data79, Data80, Data81, Data82, Data83, Data84, Data85, Data86, Data87, Data88, Data89, Data90, Data91, Data92, Data93, Data94, Data95, Data96, Data97, Data98, Data99, Data100, Data101, Data102, Data103, Data104, Data105, Data106, Data107, Data108, Data109, Data110, Data111, Data112, Data113, Data114, Data115, Data116, Data117, Data118, Data119, Data120, Data121, Data122, Data123, Data124, Data125, Data126, Data127, Data128, Data129, Data130, Data131, Data132, Data133, Data134, Data135, Data136, Data137, Data138, Data139, Data140, Data141, Data142, Data143, Data144, Data145, Data146, Data147, Data148, Data149, Data150, Data151, Data152, Data153, Data154, Data155, Data156, Data157, Data158, Data159, Data160, Data161, Data162, Data163, Data164, Data165, Data166, Data167, Data168, Data169, Data170, Data171, Data172, Data173, Data174, Data175, Data176, Data177, Data178, Data179, Data180, Data181, Data182, Data183, Data184, Data185, Data186, Data187, Data188, Data189, Data190, Data191, Data192, Data193, Data194, Data195, Data196, Data197, Data198, Data199, Data200, Data201, Data202, Data203, Data204, Data205, Data206, Data207, Data208, Data209, Data210, Data211, Data212, Data213, Data214, Data215, Data216, Data217, Data218, Data219, Data220, Data221, Data222, Data223, Data224, Data225, Data226, Data227, Data228, Data229, Data230, Data231, Data232, Data233, Data234, Data235, Data236, Data237, Data238, Data239, Data240, Data241, Data242, Data243, Data244, Data245, Data246, Data247, Data248, Data249, Data250, Data251, Data252, Data253, Data254, Data255, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8;
+
+real	x, y, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29, d30, d31, d32, d33, d34, d35, d36, d37, d38, d39, d40, d41, d42, d43, d44, d45, d46, d47, d48, d49, d50, d51, d52, d53, d54, d55, d56, d57, d58, d59, d60, d61, d62, d63, d64, d65, d66, d67, d68, d69, d70, d71, d72, d73, d74, d75, d76, d77, d78, d79, d80, d81, d82, d83, d84, d85, d86, d87, d88, d89, d90, d91, d92, d93, d94, d95, d96, d97, d98, d99, d100, d101, d102, d103, d104, d105, d106, d107, d108, d109, d110, d111, d112, d113, d114, d115, d116, d117, d118, d119, d120, d121, d122, d123, d124, d125, d126, d127, d128, d129, d130, d131, d132, d133, d134, d135, d136, d137, d138, d139, d140, d141, d142, d143, d144, d145, d146, d147, d148, d149, d150, d151, d152, d153, d154, d155, d156, d157, d158, d159, d160, d161, d162, d163, d164, d165, d166, d167, d168, d169, d170, d171, d172, d173, d174, d175, d176, d177, d178, d179, d180, d181, d182, d183, d184, d185, d186, d187, d188, d189, d190, d191, d192, d193, d194, d195, d196, d197, d198, d199, d200, d201, d202, d203, d204, d205, d206, d207, d208, d209, d210, d211, d212, d213, d214, d215, d216, d217, d218, d219, d220, d221, d222, d223, d224, d225, d226, d227, d228, d229, d230, d231, d232, d233, d234, d235, d236, d237, d238, d239, d240, d241, d242, d243, d244, d245, d246, d247, d248, d249, d250, d251, d252, d253, d254, d255;
+
+integer	a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61, a62, a63, a64, a65, a66, a67, a68, a69, a70, a71, a72, a73, a74, a75, a76, a77, a78, a79, a80, a81, a82, a83, a84, a85, a86, a87, a88, a89, a90, a91, a92, a93, a94, a95, a96, a97, a98, a99, a100, a101, a102, a103, a104, a105, a106, a107, a108, a109, a110, a111, a112, a113, a114, a115, a116, a117, a118, a119, a120, a121, a122, a123, a124, a125, a126, a127, a128, a129, fitness, x5_pre_cost, x4_pre_cost, x3_pre_cost, x2_pre_cost, x1_pre_cost, cost;
+
+
+analog begin
+
+// When Req signal is set
+@(cross (V(Req)-1.6,+1))	begin
+
+d0=V(Data0)	;
+d1=V(Data1)	;
+d2=V(Data2)	;
+d3=V(Data3)	;
+d4=V(Data4)	;
+d5=V(Data5)	;
+d6=V(Data6)	;
+d7=V(Data7)	;
+d8=V(Data8)	;
+d9=V(Data9)	;
+d10=V(Data10)	;
+d11=V(Data11)	;
+d12=V(Data12)	;
+d13=V(Data13)	;
+d14=V(Data14)	;
+d15=V(Data15)	;
+d16=V(Data16)	;
+d17=V(Data17)	;
+d18=V(Data18)	;
+d19=V(Data19)	;
+d20=V(Data20)	;
+d21=V(Data21)	;
+d22=V(Data22)	;
+d23=V(Data23)	;
+d24=V(Data24)	;
+d25=V(Data25)	;
+d26=V(Data26)	;
+d27=V(Data27)	;
+d28=V(Data28)	;
+d29=V(Data29)	;
+d30=V(Data30)	;
+d31=V(Data31)	;
+d32=V(Data32)	;
+d33=V(Data33)	;
+d34=V(Data34)	;
+d35=V(Data35)	;
+d36=V(Data36)	;
+d37=V(Data37)	;
+d38=V(Data38)	;
+d39=V(Data39)	;
+d40=V(Data40)	;
+d41=V(Data41)	;
+d42=V(Data42)	;
+d43=V(Data43)	;
+d44=V(Data44)	;
+d45=V(Data45)	;
+d46=V(Data46)	;
+d47=V(Data47)	;
+d48=V(Data48)	;
+d49=V(Data49)	;
+d50=V(Data50)	;
+d51=V(Data51)	;
+d52=V(Data52)	;
+d53=V(Data53)	;
+d54=V(Data54)	;
+d55=V(Data55)	;
+d56=V(Data56)	;
+d57=V(Data57)	;
+d58=V(Data58)	;
+d59=V(Data59)	;
+d60=V(Data60)	;
+d61=V(Data61)	;
+d62=V(Data62)	;
+d63=V(Data63)	;
+d64=V(Data64)	;
+d65=V(Data65)	;
+d66=V(Data66)	;
+d67=V(Data67)	;
+d68=V(Data68)	;
+d69=V(Data69)	;
+d70=V(Data70)	;
+d71=V(Data71)	;
+d72=V(Data72)	;
+d73=V(Data73)	;
+d74=V(Data74)	;
+d75=V(Data75)	;
+d76=V(Data76)	;
+d77=V(Data77)	;
+d78=V(Data78)	;
+d79=V(Data79)	;
+d80=V(Data80)	;
+d81=V(Data81)	;
+d82=V(Data82)	;
+d83=V(Data83)	;
+d84=V(Data84)	;
+d85=V(Data85)	;
+d86=V(Data86)	;
+d87=V(Data87)	;
+d88=V(Data88)	;
+d89=V(Data89)	;
+d90=V(Data90)	;
+d91=V(Data91)	;
+d92=V(Data92)	;
+d93=V(Data93)	;
+d94=V(Data94)	;
+d95=V(Data95)	;
+d96=V(Data96)	;
+d97=V(Data97)	;
+d98=V(Data98)	;
+d99=V(Data99)	;
+d100=V(Data100)	;
+d101=V(Data101)	;
+d102=V(Data102)	;
+d103=V(Data103)	;
+d104=V(Data104)	;
+d105=V(Data105)	;
+d106=V(Data106)	;
+d107=V(Data107)	;
+d108=V(Data108)	;
+d109=V(Data109)	;
+d110=V(Data110)	;
+d111=V(Data111)	;
+d112=V(Data112)	;
+d113=V(Data113)	;
+d114=V(Data114)	;
+d115=V(Data115)	;
+d116=V(Data116)	;
+d117=V(Data117)	;
+d118=V(Data118)	;
+d119=V(Data119)	;
+d120=V(Data120)	;
+d121=V(Data121)	;
+d122=V(Data122)	;
+d123=V(Data123)	;
+d124=V(Data124)	;
+d125=V(Data125)	;
+d126=V(Data126)	;
+d127=V(Data127)	;
+d128=V(Data128)	;
+d129=V(Data129)	;
+d130=V(Data130)	;
+d131=V(Data131)	;
+d132=V(Data132)	;
+d133=V(Data133)	;
+d134=V(Data134)	;
+d135=V(Data135)	;
+d136=V(Data136)	;
+d137=V(Data137)	;
+d138=V(Data138)	;
+d139=V(Data139)	;
+d140=V(Data140)	;
+d141=V(Data141)	;
+d142=V(Data142)	;
+d143=V(Data143)	;
+d144=V(Data144)	;
+d145=V(Data145)	;
+d146=V(Data146)	;
+d147=V(Data147)	;
+d148=V(Data148)	;
+d149=V(Data149)	;
+d150=V(Data150)	;
+d151=V(Data151)	;
+d152=V(Data152)	;
+d153=V(Data153)	;
+d154=V(Data154)	;
+d155=V(Data155)	;
+d156=V(Data156)	;
+d157=V(Data157)	;
+d158=V(Data158)	;
+d159=V(Data159)	;
+d160=V(Data160)	;
+d161=V(Data161)	;
+d162=V(Data162)	;
+d163=V(Data163)	;
+d164=V(Data164)	;
+d165=V(Data165)	;
+d166=V(Data166)	;
+d167=V(Data167)	;
+d168=V(Data168)	;
+d169=V(Data169)	;
+d170=V(Data170)	;
+d171=V(Data171)	;
+d172=V(Data172)	;
+d173=V(Data173)	;
+d174=V(Data174)	;
+d175=V(Data175)	;
+d176=V(Data176)	;
+d177=V(Data177)	;
+d178=V(Data178)	;
+d179=V(Data179)	;
+d180=V(Data180)	;
+d181=V(Data181)	;
+d182=V(Data182)	;
+d183=V(Data183)	;
+d184=V(Data184)	;
+d185=V(Data185)	;
+d186=V(Data186)	;
+d187=V(Data187)	;
+d188=V(Data188)	;
+d189=V(Data189)	;
+d190=V(Data190)	;
+d191=V(Data191)	;
+d192=V(Data192)	;
+d193=V(Data193)	;
+d194=V(Data194)	;
+d195=V(Data195)	;
+d196=V(Data196)	;
+d197=V(Data197)	;
+d198=V(Data198)	;
+d199=V(Data199)	;
+d200=V(Data200)	;
+d201=V(Data201)	;
+d202=V(Data202)	;
+d203=V(Data203)	;
+d204=V(Data204)	;
+d205=V(Data205)	;
+d206=V(Data206)	;
+d207=V(Data207)	;
+d208=V(Data208)	;
+d209=V(Data209)	;
+d210=V(Data210)	;
+d211=V(Data211)	;
+d212=V(Data212)	;
+d213=V(Data213)	;
+d214=V(Data214)	;
+d215=V(Data215)	;
+d216=V(Data216)	;
+d217=V(Data217)	;
+d218=V(Data218)	;
+d219=V(Data219)	;
+d220=V(Data220)	;
+d221=V(Data221)	;
+d222=V(Data222)	;
+d223=V(Data223)	;
+d224=V(Data224)	;
+d225=V(Data225)	;
+d226=V(Data226)	;
+d227=V(Data227)	;
+d228=V(Data228)	;
+d229=V(Data229)	;
+d230=V(Data230)	;
+d231=V(Data231)	;
+d232=V(Data232)	;
+d233=V(Data233)	;
+d234=V(Data234)	;
+d235=V(Data235)	;
+d236=V(Data236)	;
+d237=V(Data237)	;
+d238=V(Data238)	;
+d239=V(Data239)	;
+d240=V(Data240)	;
+d241=V(Data241)	;
+d242=V(Data242)	;
+d243=V(Data243)	;
+d244=V(Data244)	;
+d245=V(Data245)	;
+d246=V(Data246)	;
+d247=V(Data247)	;
+d248=V(Data248)	;
+d249=V(Data249)	;
+d250=V(Data250)	;
+d251=V(Data251)	;
+d252=V(Data252)	;
+d253=V(Data253)	;
+d254=V(Data254)	;
+d255=V(Data255)	;
+
+a1=(d0>1.5)&&(d1>1.5);
+a2=(d2>1.5)&&(d3>1.5);
+a3=(d4>1.5)&&(d5>1.5);
+a4=(d6>1.5)&&(d7>1.5);
+a5=(d8>1.5)&&(d9>1.5);
+a6=(d10>1.5)&&(d11>1.5);
+a7=(d12>1.5)&&(d13>1.5);
+a8=(d14>1.5)&&(d15>1.5);
+a9=(d16>1.5)&&(d17>1.5);
+a10=(d18>1.5)&&(d19>1.5);
+a11=(d20>1.5)&&(d21>1.5);
+a12=(d22>1.5)&&(d23>1.5);
+a13=(d24>1.5)&&(d25>1.5);
+a14=(d26>1.5)&&(d27>1.5);
+a15=(d28>1.5)&&(d29>1.5);
+a16=(d30>1.5)&&(d31>1.5);
+a17=(d32>1.5)&&(d33>1.5);
+a18=(d34>1.5)&&(d35>1.5);
+a19=(d36>1.5)&&(d37>1.5);
+a20=(d38>1.5)&&(d39>1.5);
+a21=(d40>1.5)&&(d41>1.5);
+a22=(d42>1.5)&&(d43>1.5);
+a23=(d44>1.5)&&(d45>1.5);
+a24=(d46>1.5)&&(d47>1.5);
+a25=(d48>1.5)&&(d49>1.5);
+a26=(d50>1.5)&&(d51>1.5);
+a27=(d52>1.5)&&(d53>1.5);
+a28=(d54>1.5)&&(d55>1.5);
+a29=(d56>1.5)&&(d57>1.5);
+a30=(d58>1.5)&&(d59>1.5);
+a31=(d60>1.5)&&(d61>1.5);
+a32=(d62>1.5)&&(d63>1.5);
+a33=(d64>1.5)&&(d65>1.5);
+a34=(d66>1.5)&&(d67>1.5);
+a35=(d68>1.5)&&(d69>1.5);
+a36=(d70>1.5)&&(d71>1.5);
+a37=(d72>1.5)&&(d73>1.5);
+a38=(d74>1.5)&&(d75>1.5);
+a39=(d76>1.5)&&(d77>1.5);
+a40=(d78>1.5)&&(d79>1.5);
+a41=(d80>1.5)&&(d81>1.5);
+a42=(d82>1.5)&&(d83>1.5);
+a43=(d84>1.5)&&(d85>1.5);
+a44=(d86>1.5)&&(d87>1.5);
+a45=(d88>1.5)&&(d89>1.5);
+a46=(d90>1.5)&&(d91>1.5);
+a47=(d92>1.5)&&(d93>1.5);
+a48=(d94>1.5)&&(d95>1.5);
+a49=(d96>1.5)&&(d97>1.5);
+a50=(d98>1.5)&&(d99>1.5);
+a51=(d100>1.5)&&(d101>1.5);
+a52=(d102>1.5)&&(d103>1.5);
+a53=(d104>1.5)&&(d105>1.5);
+a54=(d106>1.5)&&(d107>1.5);
+a55=(d108>1.5)&&(d109>1.5);
+a56=(d110>1.5)&&(d111>1.5);
+a57=(d112>1.5)&&(d113>1.5);
+a58=(d114>1.5)&&(d115>1.5);
+a59=(d116>1.5)&&(d117>1.5);
+a60=(d118>1.5)&&(d119>1.5);
+a61=(d120>1.5)&&(d121>1.5);
+a62=(d122>1.5)&&(d123>1.5);
+a63=(d124>1.5)&&(d125>1.5);
+a64=(d126>1.5)&&(d127>1.5);
+a65=(d128>1.5)&&(d129>1.5);
+a66=(d130>1.5)&&(d131>1.5);
+a67=(d132>1.5)&&(d133>1.5);
+a68=(d134>1.5)&&(d135>1.5);
+a69=(d136>1.5)&&(d137>1.5);
+a70=(d138>1.5)&&(d139>1.5);
+a71=(d140>1.5)&&(d141>1.5);
+a72=(d142>1.5)&&(d143>1.5);
+a73=(d144>1.5)&&(d145>1.5);
+a74=(d146>1.5)&&(d147>1.5);
+a75=(d148>1.5)&&(d149>1.5);
+a76=(d150>1.5)&&(d151>1.5);
+a77=(d152>1.5)&&(d153>1.5);
+a78=(d154>1.5)&&(d155>1.5);
+a79=(d156>1.5)&&(d157>1.5);
+a80=(d158>1.5)&&(d159>1.5);
+a81=(d160>1.5)&&(d161>1.5);
+a82=(d162>1.5)&&(d163>1.5);
+a83=(d164>1.5)&&(d165>1.5);
+a84=(d166>1.5)&&(d167>1.5);
+a85=(d168>1.5)&&(d169>1.5);
+a86=(d170>1.5)&&(d171>1.5);
+a87=(d172>1.5)&&(d173>1.5);
+a88=(d174>1.5)&&(d175>1.5);
+a89=(d176>1.5)&&(d177>1.5);
+a90=(d178>1.5)&&(d179>1.5);
+a91=(d180>1.5)&&(d181>1.5);
+a92=(d182>1.5)&&(d183>1.5);
+a93=(d184>1.5)&&(d185>1.5);
+a94=(d186>1.5)&&(d187>1.5);
+a95=(d188>1.5)&&(d189>1.5);
+a96=(d190>1.5)&&(d191>1.5);
+a97=(d192>1.5)&&(d193>1.5);
+a98=(d194>1.5)&&(d195>1.5);
+a99=(d196>1.5)&&(d197>1.5);
+a100=(d198>1.5)&&(d199>1.5);
+a101=(d200>1.5)&&(d201>1.5);
+a102=(d202>1.5)&&(d203>1.5);
+a103=(d204>1.5)&&(d205>1.5);
+a104=(d206>1.5)&&(d207>1.5);
+a105=(d208>1.5)&&(d209>1.5);
+a106=(d210>1.5)&&(d211>1.5);
+a107=(d212>1.5)&&(d213>1.5);
+a108=(d214>1.5)&&(d215>1.5);
+a109=(d216>1.5)&&(d217>1.5);
+a110=(d218>1.5)&&(d219>1.5);
+a111=(d220>1.5)&&(d221>1.5);
+a112=(d222>1.5)&&(d223>1.5);
+a113=(d224>1.5)&&(d225>1.5);
+a114=(d226>1.5)&&(d227>1.5);
+a115=(d228>1.5)&&(d229>1.5);
+a116=(d230>1.5)&&(d231>1.5);
+a117=(d232>1.5)&&(d233>1.5);
+a118=(d234>1.5)&&(d235>1.5);
+a119=(d236>1.5)&&(d237>1.5);
+a120=(d238>1.5)&&(d239>1.5);
+a121=(d240>1.5)&&(d241>1.5);
+a122=(d242>1.5)&&(d243>1.5);
+a123=(d244>1.5)&&(d245>1.5);
+a124=(d246>1.5)&&(d247>1.5);
+a125=(d248>1.5)&&(d249>1.5);
+a126=(d250>1.5)&&(d251>1.5);
+a127=(d252>1.5)&&(d253>1.5);
+a128=(d254>1.5)&&(d255>1.5);
+
+a129=128*((a1)&&(a2)&&(a3)&&(a4)&&(a5)&&(a6)&&(a7)&&(a8)&&(a9)&&(a10)&&(a11)&&(a12)&&(a13)&&(a14)&&(a15)&&(a16)&&(a17)&&(a18)&&(a19)&&(a20)&&(a21)&&(a22)&&(a23)&&(a24)&&(a25)&&(a26)&&(a27)&&(a28)&&(a29)&&(a30)&&(a31)&&(a32)&&(a33)&&(a34)&&(a35)&&(a36)&&(a37)&&(a38)&&(a39)&&(a40)&&(a41)&&(a42)&&(a43)&&(a44)&&(a45)&&(a46)&&(a47)&&(a48)&&(a49)&&(a50)&&(a51)&&(a52)&&(a53)&&(a54)&&(a55)&&(a56)&&(a57)&&(a58)&&(a59)&&(a60)&&(a61)&&(a62)&&(a63)&&(a64)&&(a65)&&(a66)&&(a67)&&(a68)&&(a69)&&(a70)&&(a71)&&(a72)&&(a73)&&(a74)&&(a75)&&(a76)&&(a77)&&(a78)&&(a79)&&(a80)&&(a81)&&(a82)&&(a83)&&(a84)&&(a85)&&(a86)&&(a87)&&(a88)&&(a89)&&(a90)&&(a91)&&(a92)&&(a93)&&(a94)&&(a95)&&(a96)&&(a97)&&(a98)&&(a99)&&(a100)&&(a101)&&(a102)&&(a103)&&(a104)&&(a105)&&(a106)&&(a107)&&(a108)&&(a109)&&(a110)&&(a111)&&(a112)&&(a113)&&(a114)&&(a115)&&(a116)&&(a117)&&(a118)&&(a119)&&(a120)&&(a121)&&(a122)&&(a123)&&(a124)&&(a125)&&(a126)&&(a127)&&(a128));
+
+fitness=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12+a13+a14+a15+a16+a17+a18+a19+a20+a21+a22+a23+a24+a25+a26+a27+a28+a29+a30+a31+a32+a33+a34+a35+a36+a37+a38+a39+a40+a41+a42+a43+a44+a45+a46+a47+a48+a49+a50+a51+a52+a53+a54+a55+a56+a57+a58+a59+a60+a61+a62+a63+a64+a65+a66+a67+a68+a69+a70+a71+a72+a73+a74+a75+a76+a77+a78+a79+a80+a81+a82+a83+a84+a85+a86+a87+a88+a89+a90+a91+a92+a93+a94+a95+a96+a97+a98+a99+a100+a101+a102+a103+a104+a105+a106+a107+a108+a109+a110+a111+a112+a113+a114+a115+a116+a117+a118+a119+a120+a121+a122+a123+a124+a125+a126+a127+a128+a129;
+
+x=1.8;
+
+end
+
+// When Req signal is reset
+@(cross (V(Req)-0.2,-1))	begin
+
+x=0;
+
+end
+
+// When Ready signal is set
+@(cross (V(Ready)-1.6,+1))	begin
+
+cost=x1_pre_cost;
+x1_pre_cost=x2_pre_cost;
+x2_pre_cost=x3_pre_cost;
+x3_pre_cost=x4_pre_cost;
+x4_pre_cost=x5_pre_cost;
+x5_pre_cost=256-fitness;
+
+y=1.8;
+
+end
+
+// Output fitness data
+V(Out8) <+	transition(1.8*((cost)>=256),100p,50p,50p);
+V(Out7) <+	transition(1.8*((cost%256)>=128),100p,50p,50p);
+V(Out6) <+	transition(1.8*((cost%128)>=64),100p,50p,50p);
+V(Out5) <+	transition(1.8*((cost%64)>=32),100p,50p,50p);
+V(Out4) <+	transition(1.8*((cost%32)>=16),100p,50p,50p);
+V(Out3) <+	transition(1.8*((cost%16)>=8),100p,50p,50p);
+V(Out2) <+	transition(1.8*((cost%8)>=4),100p,50p,50p);
+V(Out1) <+	transition(1.8*((cost%4)>=2),100p,50p,50p);
+V(Out0) <+	transition(1.8*((cost%2)>=1),100p,50p,50p);
+
+// When Ready signal is reset
+@(cross (V(Ready)-0.2,-1))	begin
+
+y=0	;
+
+end
+
+// Acknowledge signal in the handshake mechanism
+V(Ack) <+ transition(x,200p,50p,50p)	;
+V(Ack) <+ transition(y,200p,50p,50p)	;
+
+end
+
+endmodule

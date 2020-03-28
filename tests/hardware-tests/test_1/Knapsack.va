@@ -1,0 +1,129 @@
+// Knapsack Problem 
+
+// Dependencies
+`include "./disciplines.vams" // Natures and disciplines  
+`include "./constants.vams"   // Common physical and math constants 
+
+// Knapsack fitness function module
+module	Knapsack(Req, Ready, Ack, Discard, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8);
+
+// Declarations
+input	Req, Ready, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29;
+
+output	Ack, Discard, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8 ;
+
+electrical	Req, Ready, Ack, Discard, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Out0, Out1, Out2, Out3, Out4, Out5, Out6, Out7, Out8;
+
+real	x, y, z, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29;
+
+integer	a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, fitness;
+
+
+analog begin
+
+// When Req signal is set
+@(cross (V(Req)-1.6,+1))	begin
+
+d0=V(Data0)	;
+d1=V(Data1)	;
+d2=V(Data2)	;
+d3=V(Data3)	;
+d4=V(Data4)	;
+d5=V(Data5)	;
+d6=V(Data6)	;
+d7=V(Data7)	;
+d8=V(Data8)	;
+d9=V(Data9)	;
+d10=V(Data10)	;
+d11=V(Data11)	;
+d12=V(Data12)	;
+d13=V(Data13)	;
+d14=V(Data14)	;
+d15=V(Data15)	;
+d16=V(Data16)	;
+d17=V(Data17)	;
+d18=V(Data18)	;
+d19=V(Data19)	;
+d20=V(Data20)	;
+d21=V(Data21)	;
+d22=V(Data22)	;
+d23=V(Data23)	;
+d24=V(Data24)	;
+d25=V(Data25)	;
+d26=V(Data26)	;
+d27=V(Data27)	;
+d28=V(Data28)	;
+d29=V(Data29)	;
+
+x=1.8;
+
+end
+
+// When Req signal is reset
+@(cross (V(Req)-0.2,-1))	begin
+
+x=0;
+
+end
+
+// When Ready signal is set
+@(cross (V(Ready)-1.6,+1))	begin
+
+a1=(2*(d1>1.5))+(d0>1.5)+(8*((d1>1.5)||(d0>1.5)))	;
+a2=(2*(d3>1.5))+(d2>1.5)+(8*((d3>1.5)||(d2>1.5)))	;
+a3=(2*(d5>1.5))+(d4>1.5)+(8*((d5>1.5)||(d4>1.5)))	;
+
+a4=(2*(d7>1.5))+(d6>1.5)+(16*((d7>1.5)||(d6>1.5)))	;
+a5=(2*(d9>1.5))+(d8>1.5)+(16*((d9>1.5)||(d8>1.5)))	;
+a6=(2*(d11>1.5))+(d10>1.5)+(16*((d11>1.5)||(d10>1.5)))	;
+
+a7=(2*(d13>1.5))+(d12>1.5)+(24*((d13>1.5)||(d12>1.5)))	;
+a8=(2*(d15>1.5))+(d14>1.5)+(24*((d15>1.5)||(d14>1.5)))	;
+a9=(2*(d17>1.5))+(d16>1.5)+(24*((d17>1.5)||(d16>1.5)))	;
+
+a10=(2*(d19>1.5))+(d18>1.5)+(40*((d19>1.5)||(d18>1.5)))	;
+a11=(2*(d21>1.5))+(d20>1.5)+(40*((d21>1.5)||(d20>1.5)))	;
+a12=(2*(d23>1.5))+(d22>1.5)+(40*((d23>1.5)||(d22>1.5)))	;
+
+a13=(2*(d25>1.5))+(d24>1.5)+(56*((d25>1.5)||(d24>1.5)))	;
+a14=(2*(d27>1.5))+(d26>1.5)+(56*((d27>1.5)||(d26>1.5)))	;
+a15=(2*(d29>1.5))+(d28>1.5)+(56*((d29>1.5)||(d28>1.5)))	;
+
+fitness=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12+a13+a14+a15	;
+
+
+if (fitness>450)	z=1.8;	else	z=0;
+
+y=1.8;
+
+end
+
+// Output fitness data
+V(Out8) <+	transition(1.8*(fitness>=256),100p,100p,100p);
+V(Out7) <+	transition(1.8*((fitness%256)>=128),100p,100p,100p);
+V(Out6) <+	transition(1.8*((fitness%128)>=64),100p,100p,100p);
+V(Out5) <+	transition(1.8*((fitness%64)>=32),100p,100p,100p);
+V(Out4) <+	transition(1.8*((fitness%32)>=16),100p,100p,100p);
+V(Out3) <+	transition(1.8*((fitness%16)>=8),100p,100p,100p);
+V(Out2) <+	transition(1.8*((fitness%8)>=4),100p,100p,100p);
+V(Out1) <+	transition(1.8*((fitness%4)>=2),100p,100p,100p);
+V(Out0) <+	transition(1.8*((fitness%2)>=1),100p,100p,100p);
+
+// When Ready signal is reset
+@(cross (V(Ready)-0.2,-1))	begin
+
+y=0	;
+z=0	;
+
+end
+
+// Acknowledge signal in the handshake mechanism
+V(Ack) <+ transition(y,200p,50p,50p)	;
+V(Ack) <+ transition(x,200p,50p,50p)	;
+
+// Set if the input sample should be discarded (out of constraint bounds)
+V(Discard) <+ transition(z,200p,50p,50p)	;
+
+end
+
+endmodule

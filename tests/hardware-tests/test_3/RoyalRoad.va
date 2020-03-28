@@ -1,0 +1,176 @@
+// Royal Road Function with two pipeline stages
+
+// Dependencies
+`include "disciplines.vams" // Natures and disciplines
+
+// Royal road fitness function module
+module	RoyalRoad(Req, Ready, Ack, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63, Out0, Out1, Out2, Out3, Out4, Out5, Out6);
+
+// Declarations
+input	Req, Ready, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63;
+
+output	Ack, Out0, Out1, Out2, Out3, Out4, Out5, Out6;
+
+electrical	Req, Ready, Ack, Data0, Data1, Data2, Data3, Data4, Data5, Data6, Data7, Data8, Data9, Data10, Data11, Data12, Data13, Data14, Data15, Data16, Data17, Data18, Data19, Data20, Data21, Data22, Data23, Data24, Data25, Data26, Data27, Data28, Data29, Data30, Data31, Data32, Data33, Data34, Data35, Data36, Data37, Data38, Data39, Data40, Data41, Data42, Data43, Data44, Data45, Data46, Data47, Data48, Data49, Data50, Data51, Data52, Data53, Data54, Data55, Data56, Data57, Data58, Data59, Data60, Data61, Data62, Data63, Out0, Out1, Out2, Out3, Out4, Out5, Out6;
+
+real	x, y, d0, d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13, d14, d15, d16, d17, d18, d19, d20, d21, d22, d23, d24, d25, d26, d27, d28, d29, d30, d31, d32, d33, d34, d35, d36, d37, d38, d39, d40, d41, d42, d43, d44, d45, d46, d47, d48, d49, d50, d51, d52, d53, d54, d55, d56, d57, d58, d59, d60, d61, d62, d63;
+
+integer	a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, pre_fitness, fitness, pre_pre_cost, pre_cost, cost;
+
+
+analog begin
+
+// When Req signal is set
+@(cross (V(Req)-1.6,+1))	begin
+
+fitness=pre_fitness;
+
+d0=V(Data0)	;
+d1=V(Data1)	;
+d2=V(Data2)	;
+d3=V(Data3)	;
+d4=V(Data4)	;
+d5=V(Data5)	;
+d6=V(Data6)	;
+d7=V(Data7)	;
+d8=V(Data8)	;
+d9=V(Data9)	;
+d10=V(Data10)	;
+d11=V(Data11)	;
+d12=V(Data12)	;
+d13=V(Data13)	;
+d14=V(Data14)	;
+d15=V(Data15)	;
+d16=V(Data16)	;
+d17=V(Data17)	;
+d18=V(Data18)	;
+d19=V(Data19)	;
+d20=V(Data20)	;
+d21=V(Data21)	;
+d22=V(Data22)	;
+d23=V(Data23)	;
+d24=V(Data24)	;
+d25=V(Data25)	;
+d26=V(Data26)	;
+d27=V(Data27)	;
+d28=V(Data28)	;
+d29=V(Data29)	;
+d30=V(Data30)	;
+d31=V(Data31)	;
+d32=V(Data32)	;
+d33=V(Data33)	;
+d34=V(Data34)	;
+d35=V(Data35)	;
+d36=V(Data36)	;
+d37=V(Data37)	;
+d38=V(Data38)	;
+d39=V(Data39)	;
+d40=V(Data40)	;
+d41=V(Data41)	;
+d42=V(Data42)	;
+d43=V(Data43)	;
+d44=V(Data44)	;
+d45=V(Data45)	;
+d46=V(Data46)	;
+d47=V(Data47)	;
+d48=V(Data48)	;
+d49=V(Data49)	;
+d50=V(Data50)	;
+d51=V(Data51)	;
+d52=V(Data52)	;
+d53=V(Data53)	;
+d54=V(Data54)	;
+d55=V(Data55)	;
+d56=V(Data56)	;
+d57=V(Data57)	;
+d58=V(Data58)	;
+d59=V(Data59)	;
+d60=V(Data60)	;
+d61=V(Data61)	;
+d62=V(Data62)	;
+d63=V(Data63)	;
+
+a1=(d0>1.5)&&(d1>1.5);
+a2=(d2>1.5)&&(d3>1.5);
+a3=(d4>1.5)&&(d5>1.5);
+a4=(d6>1.5)&&(d7>1.5);
+a5=(d8>1.5)&&(d9>1.5);
+a6=(d10>1.5)&&(d11>1.5);
+a7=(d12>1.5)&&(d13>1.5);
+a8=(d14>1.5)&&(d15>1.5);
+a9=(d16>1.5)&&(d17>1.5);
+a10=(d18>1.5)&&(d19>1.5);
+a11=(d20>1.5)&&(d21>1.5);
+a12=(d22>1.5)&&(d23>1.5);
+a13=(d24>1.5)&&(d25>1.5);
+a14=(d26>1.5)&&(d27>1.5);
+a15=(d28>1.5)&&(d29>1.5);
+a16=(d30>1.5)&&(d31>1.5);
+a17=(d32>1.5)&&(d33>1.5);
+a18=(d34>1.5)&&(d35>1.5);
+a19=(d36>1.5)&&(d37>1.5);
+a20=(d38>1.5)&&(d39>1.5);
+a21=(d40>1.5)&&(d41>1.5);
+a22=(d42>1.5)&&(d43>1.5);
+a23=(d44>1.5)&&(d45>1.5);
+a24=(d46>1.5)&&(d47>1.5);
+a25=(d48>1.5)&&(d49>1.5);
+a26=(d50>1.5)&&(d51>1.5);
+a27=(d52>1.5)&&(d53>1.5);
+a28=(d54>1.5)&&(d55>1.5);
+a29=(d56>1.5)&&(d57>1.5);
+a30=(d58>1.5)&&(d59>1.5);
+a31=(d60>1.5)&&(d61>1.5);
+a32=(d62>1.5)&&(d63>1.5);
+
+a33=32*((a1)&&(a2)&&(a3)&&(a4)&&(a5)&&(a6)&&(a7)&&(a8)&&(a9)&&(a10)&&(a11)&&(a12)&&(a13)&&(a14)&&(a15)&&(a16)&&(a17)&&(a18)&&(a19)&&(a20)&&(a21)&&(a22)&&(a23)&&(a24)&&(a25)&&(a26)&&(a27)&&(a28)&&(a29)&&(a30)&&(a31)&&(a32));
+
+pre_fitness=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12+a13+a14+a15+a16+a17+a18+a19+a20+a21+a22+a23+a24+a25+a26+a27+a28+a29+a30+a31+a32+a33;
+
+x=1.8;
+
+end
+
+// When Req signal is reset
+@(cross (V(Req)-0.2,-1))	begin
+
+x=0;
+
+end
+
+// When Ready signal is set
+@(cross (V(Ready)-1.6,+1))	begin
+
+cost=pre_cost;
+pre_cost=pre_pre_cost;
+pre_pre_cost=64-fitness;
+
+y=1.8;
+
+end
+
+// Output fitness data
+V(Out6) <+	transition(1.8*((cost)>=64),200p,100p,100p);
+V(Out5) <+	transition(1.8*((cost%64)>=32),200p,100p,100p);
+V(Out4) <+	transition(1.8*((cost%32)>=16),200p,100p,100p);
+V(Out3) <+	transition(1.8*((cost%16)>=8),200p,100p,100p);
+V(Out2) <+	transition(1.8*((cost%8)>=4),200p,100p,100p);
+V(Out1) <+	transition(1.8*((cost%4)>=2),200p,100p,100p);
+V(Out0) <+	transition(1.8*((cost%2)>=1),200p,100p,100p);
+
+// When Ready signal is reset
+@(cross (V(Ready)-0.2,-1))	begin
+
+fitness=pre_fitness;
+
+y=0	;
+
+end
+
+// Acknowledge signal in the handshake mechanism
+V(Ack) <+ transition(x,400p,100p,100p)	;
+V(Ack) <+ transition(y,400p,100p,100p)	;
+
+end
+
+endmodule
