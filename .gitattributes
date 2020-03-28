@@ -1,10 +1,10 @@
 docs/* linguist-documentation=true
 
 *.sp linguist-detectable=true
-*.sp linguist-language=KiCad Layout
+*.sp linguist-language="KiCad Layout"
 
 *.inc linguist-detectable=true
-*.inc linguist-language=KiCad Layout
+*.inc linguist-language="KiCad Layout"
 
 *.va linguist-detectable=true
 *.va linguist-language=Verilog
