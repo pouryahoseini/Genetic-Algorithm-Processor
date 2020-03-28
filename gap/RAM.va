@@ -1,0 +1,323 @@
+//RAM
+
+// Dependencies
+`include "./disciplines.vams" // Natures and disciplines  
+`include "./constants.vams"   // Common physical and math constants 
+
+//The RAM module
+module RAM(cs,	write,	chromosomeresolution,	fitnessresolution,	add0,	add1,	add2,	add3,	add4,	add5,	add6,	add7,	cout0,	cout1,	cout2,	cout3,	cout4,	cout5,	cout6,	cout7,	cout8,	cout9,	cout10,	cout11,	cout12,	cout13,	cout14,	cout15,	cout16,	cout17,	cout18,	cout19,	cout20,	cout21,	cout22,	cout23,	cout24,	cout25,	cout26,	cout27,	cout28,	cout29,	cout30,	cout31,	fout0,	fout1,	fout2,	fout3,	fout4,	fout5,	fout6,	fout7,	fout8,	fout9,	fout10,	fout11,	fout12,	fout13,	fout14,	fout15,	fout16,	fout17,	fout18,	fout19,	fout20,	fout21,	fout22,	fout23,	fout24,	fout25,	fout26,	fout27,	fout28,	fout29,	fout30,	fout31,	cdata0,	cdata1,	cdata2,	cdata3,	cdata4,	cdata5,	cdata6,	cdata7,	cdata8,	cdata9,	cdata10,	cdata11,	cdata12,	cdata13,	cdata14,	cdata15,	cdata16,	cdata17,	cdata18,	cdata19,	cdata20,	cdata21,	cdata22,	cdata23,	cdata24,	cdata25,	cdata26,	cdata27,	cdata28,	cdata29,	cdata30,	cdata31,	fdata0,	fdata1,	fdata2,	fdata3,	fdata4,	fdata5,	fdata6,	fdata7,	fdata8,	fdata9,	fdata10,	fdata11,	fdata12,	fdata13,	fdata14,	fdata15,	fdata16,	fdata17,	fdata18,	fdata19,	fdata20,	fdata21,	fdata22,	fdata23,	fdata24,	fdata25,	fdata26,	fdata27,	fdata28,	fdata29,	fdata30,	fdata31)	;
+
+//parameter delay=550p	;
+
+// Declarations
+input cs,	write,	chromosomeresolution,	fitnessresolution,	add0,	add1,	add2,	add3,	add4,	add5,	add6,	add7,	cdata0,	cdata1,	cdata2,	cdata3,	cdata4,	cdata5,	cdata6,	cdata7,	cdata8,	cdata9,	cdata10,	cdata11,	cdata12,	cdata13,	cdata14,	cdata15,	cdata16,	cdata17,	cdata18,	cdata19,	cdata20,	cdata21,	cdata22,	cdata23,	cdata24,	cdata25,	cdata26,	cdata27,	cdata28,	cdata29,	cdata30,	cdata31,	fdata0,	fdata1,	fdata2,	fdata3,	fdata4,	fdata5,	fdata6,	fdata7,	fdata8,	fdata9,	fdata10,	fdata11,	fdata12,	fdata13,	fdata14,	fdata15,	fdata16,	fdata17,	fdata18,	fdata19,	fdata20,	fdata21,	fdata22,	fdata23,	fdata24,	fdata25,	fdata26,	fdata27,	fdata28,	fdata29,	fdata30,	fdata31	;
+
+output	cout0,	cout1,	cout2,	cout3,	cout4,	cout5,	cout6,	cout7,	cout8,	cout9,	cout10,	cout11,	cout12,	cout13,	cout14,	cout15,	cout16,	cout17,	cout18,	cout19,	cout20,	cout21,	cout22,	cout23,	cout24,	cout25,	cout26,	cout27,	cout28,	cout29,	cout30,	cout31,	fout0,	fout1,	fout2,	fout3,	fout4,	fout5,	fout6,	fout7,	fout8,	fout9,	fout10,	fout11,	fout12,	fout13,	fout14,	fout15,	fout16,	fout17,	fout18,	fout19,	fout20,	fout21,	fout22,	fout23,	fout24,	fout25,	fout26,	fout27,	fout28,	fout29,	fout30,	fout31	;
+
+electrical	cs,	write,	chromosomeresolution,	fitnessresolution,	add0,	add1,	add2,	add3,	add4,	add5,	add6,	add7,	cout0,	cout1,	cout2,	cout3,	cout4,	cout5,	cout6,	cout7,	cout8,	cout9,	cout10,	cout11,	cout12,	cout13,	cout14,	cout15,	cout16,	cout17,	cout18,	cout19,	cout20,	cout21,	cout22,	cout23,	cout24,	cout25,	cout26,	cout27,	cout28,	cout29,	cout30,	cout31,	fout0,	fout1,	fout2,	fout3,	fout4,	fout5,	fout6,	fout7,	fout8,	fout9,	fout10,	fout11,	fout12,	fout13,	fout14,	fout15,	fout16,	fout17,	fout18,	fout19,	fout20,	fout21,	fout22,	fout23,	fout24,	fout25,	fout26,	fout27,	fout28,	fout29,	fout30,	fout31,	cdata0,	cdata1,	cdata2,	cdata3,	cdata4,	cdata5,	cdata6,	cdata7,	cdata8,	cdata9,	cdata10,	cdata11,	cdata12,	cdata13,	cdata14,	cdata15,	cdata16,	cdata17,	cdata18,	cdata19,	cdata20,	cdata21,	cdata22,	cdata23,	cdata24,	cdata25,	cdata26,	cdata27,	cdata28,	cdata29,	cdata30,	cdata31,	fdata0,	fdata1,	fdata2,	fdata3,	fdata4,	fdata5,	fdata6,	fdata7,	fdata8,	fdata9,	fdata10,	fdata11,	fdata12,	fdata13,	fdata14,	fdata15,	fdata16,	fdata17,	fdata18,	fdata19,	fdata20,	fdata21,	fdata22,	fdata23,	fdata24,	fdata25,	fdata26,	fdata27,	fdata28,	fdata29,	fdata30,	fdata31,	ccout0,	ccout1,	ccout2,	ccout3,	ccout4,	ccout5,	ccout6,	ccout7,	ccout8,	ccout9,	ccout10,	ccout11,	ccout12,	ccout13,	ccout14,	ccout15,	ccout16,	ccout17,	ccout18,	ccout19,	ccout20,	ccout21,	ccout22,	ccout23,	ccout24,	ccout25,	ccout26,	ccout27,	ccout28,	ccout29,	ccout30,	ccout31,	ffout0,	ffout1,	ffout2,	ffout3,	ffout4,	ffout5,	ffout6,	ffout7,	ffout8,	ffout9,	ffout10,	ffout11,	ffout12,	ffout13,	ffout14,	ffout15,	ffout16,	ffout17,	ffout18,	ffout19,	ffout20,	ffout21,	ffout22,	ffout23,	ffout24,	ffout25,	ffout26,	ffout27,	ffout28,	ffout29,	ffout30,	ffout31	;
+
+real	 dc0 [0:256],	dc1 [0:256],	dc2 [0:256],	dc3 [0:256],	dc4 [0:256],	dc5 [0:256],	dc6 [0:256],	dc7 [0:256],	dc8 [0:256],	dc9 [0:256],	dc10 [0:256],	dc11 [0:256],	dc12 [0:256],	dc13 [0:256],	dc14 [0:256],	dc15 [0:256],	dc16 [0:256],	dc17 [0:256],	dc18 [0:256],	dc19 [0:256],	dc20 [0:256],	dc21 [0:256],	dc22 [0:256],	dc23 [0:256],	dc24 [0:256],	dc25 [0:256],	dc26 [0:256],	dc27 [0:256],	dc28 [0:256],	dc29 [0:256],	dc30 [0:256],	dc31 [0:256],	df0 [0:256],	df1 [0:256],	df2 [0:256],	df3 [0:256],	df4 [0:256],	df5 [0:256],	df6 [0:256],	df7 [0:256],	df8 [0:256],	df9 [0:256],	df10 [0:256],	df11 [0:256],	df12 [0:256],	df13 [0:256],	df14 [0:256],	df15 [0:256],	df16 [0:256],	df17 [0:256],	df18 [0:256],	df19 [0:256],	df20 [0:256],	df21 [0:256],	df22 [0:256],	df23 [0:256],	df24 [0:256],	df25 [0:256],	df26 [0:256],	df27 [0:256],	df28 [0:256],	df29 [0:256],	df30 [0:256],	df31 [0:256]	, Vadd0,	Vadd1,	Vadd2,	Vadd3,	Vadd4,	Vadd5,	Vadd6,	Vadd7,	ddc0,	ddc1,	ddc2,	ddc3,	ddc4,	ddc5,	ddc6,	ddc7,	ddc8,	ddc9,	ddc10,	ddc11,	ddc12,	ddc13,	ddc14,	ddc15,	ddc16,	ddc17,	ddc18,	ddc19,	ddc20,	ddc21,	ddc22,	ddc23,	ddc24,	ddc25,	ddc26,	ddc27,	ddc28,	ddc29,	ddc30,	ddc31,	ddf0,	ddf1,	ddf2,	ddf3,	ddf4,	ddf5,	ddf6,	ddf7,	ddf8,	ddf9,	ddf10,	ddf11,	ddf12,	ddf13,	ddf14,	ddf15,	ddf16,	ddf17,	ddf18,	ddf19,	ddf20,	ddf21,	ddf22,	ddf23,	ddf24,	ddf25,	ddf26,	ddf27,	ddf28,	ddf29,	ddf30,	ddf31,	vcs,	vwrite	;
+
+integer addr,	address0,	address1,	address2,	address3,	address4,	address5,	address6,	address7	;
+
+
+analog begin
+
+Vadd0=V(add0);
+Vadd1=V(add1);
+Vadd2=V(add2);
+Vadd3=V(add3);
+Vadd4=V(add4);
+Vadd5=V(add5);
+Vadd6=V(add6);
+Vadd7=V(add7);
+
+if (Vadd0>0.9)	address0=1;	else	address0=0	;
+if (Vadd1>0.9)	address1=1;	else	address1=0	;
+if (Vadd2>0.9)	address2=1;	else	address2=0	;
+if (Vadd3>0.9)	address3=1;	else	address3=0	;
+if (Vadd4>0.9)	address4=1;	else	address4=0	;
+if (Vadd5>0.9)	address5=1;	else	address5=0	;
+if (Vadd6>0.9)	address6=1;	else	address6=0	;
+if (Vadd7>0.9)	address7=1;	else	address7=0	;
+
+addr=(address0)+(2*address1)+(4*address2)+(8*address3)+(16*address4)+(32*address5)+(64*address6)+(128*address7)	;
+
+vcs=V(cs);
+vwrite=V(write);
+
+if	(vcs>1.6 && vwrite>1.6)	begin
+
+
+ddc0=V(cdata0)	;
+ddc1=V(cdata1)	;
+ddc2=V(cdata2)	;
+ddc3=V(cdata3)	;
+ddc4=V(cdata4)	;
+ddc5=V(cdata5)	;
+ddc6=V(cdata6)	;
+ddc7=V(cdata7)	;
+ddc8=V(cdata8)	;
+ddc9=V(cdata9)	;
+ddc10=V(cdata10)	;
+ddc11=V(cdata11)	;
+ddc12=V(cdata12)	;
+ddc13=V(cdata13)	;
+ddc14=V(cdata14)	;
+ddc15=V(cdata15)	;
+ddc16=V(cdata16)	;
+ddc17=V(cdata17)	;
+ddc18=V(cdata18)	;
+ddc19=V(cdata19)	;
+ddc20=V(cdata20)	;
+ddc21=V(cdata21)	;
+ddc22=V(cdata22)	;
+ddc23=V(cdata23)	;
+ddc24=V(cdata24)	;
+ddc25=V(cdata25)	;
+ddc26=V(cdata26)	;
+ddc27=V(cdata27)	;
+ddc28=V(cdata28)	;
+ddc29=V(cdata29)	;
+ddc30=V(cdata30)	;
+ddc31=V(cdata31)	;
+
+ddf0=V(fdata0)	;
+ddf1=V(fdata1)	;
+ddf2=V(fdata2)	;
+ddf3=V(fdata3)	;
+ddf4=V(fdata4)	;
+ddf5=V(fdata5)	;
+ddf6=V(fdata6)	;
+ddf7=V(fdata7)	;
+ddf8=V(fdata8)	;
+ddf9=V(fdata9)	;
+ddf10=V(fdata10)	;
+ddf11=V(fdata11)	;
+ddf12=V(fdata12)	;
+ddf13=V(fdata13)	;
+ddf14=V(fdata14)	;
+ddf15=V(fdata15)	;
+ddf16=V(fdata16)	;
+ddf17=V(fdata17)	;
+ddf18=V(fdata18)	;
+ddf19=V(fdata19)	;
+ddf20=V(fdata20)	;
+ddf21=V(fdata21)	;
+ddf22=V(fdata22)	;
+ddf23=V(fdata23)	;
+ddf24=V(fdata24)	;
+ddf25=V(fdata25)	;
+ddf26=V(fdata26)	;
+ddf27=V(fdata27)	;
+ddf28=V(fdata28)	;
+ddf29=V(fdata29)	;
+ddf30=V(fdata30)	;
+ddf31=V(fdata31)	;
+
+
+dc0 [addr] =ddc0	;
+dc1[addr]=ddc1	;
+dc2[addr]=ddc2	;
+dc3[addr]=ddc3	;
+dc4[addr]=ddc4	;
+dc5[addr]=ddc5	;
+dc6[addr]=ddc6	;
+dc7[addr]=ddc7	;
+dc8[addr]=ddc8	;
+dc9[addr]=ddc9	;
+dc10[addr]=ddc10	;
+dc11[addr]=ddc11	;
+dc12[addr]=ddc12	;
+dc13[addr]=ddc13	;
+dc14[addr]=ddc14	;
+dc15[addr]=ddc15	;
+dc16[addr]=ddc16	;
+dc17[addr]=ddc17	;
+dc18[addr]=ddc18	;
+dc19[addr]=ddc19	;
+dc20[addr]=ddc20	;
+dc21[addr]=ddc21	;
+dc22[addr]=ddc22	;
+dc23[addr]=ddc23	;
+dc24[addr]=ddc24	;
+dc25[addr]=ddc25	;
+dc26[addr]=ddc26	;
+dc27[addr]=ddc27	;
+dc28[addr]=ddc28	;
+dc29[addr]=ddc29	;
+dc30[addr]=ddc30	;
+dc31[addr]=ddc31	;
+
+df0[addr]=ddf0	;
+df1[addr]=ddf1	;
+df2[addr]=ddf2	;
+df3[addr]=ddf3	;
+df4[addr]=ddf4	;
+df5[addr]=ddf5	;
+df6[addr]=ddf6	;
+df7[addr]=ddf7	;
+df8[addr]=ddf8	;
+df9[addr]=ddf9	;
+df10[addr]=ddf10	;
+df11[addr]=ddf11	;
+df12[addr]=ddf12	;
+df13[addr]=ddf13	;
+df14[addr]=ddf14	;
+df15[addr]=ddf15	;
+df16[addr]=ddf16	;
+df17[addr]=ddf17	;
+df18[addr]=ddf18	;
+df19[addr]=ddf19	;
+df20[addr]=ddf20	;
+df21[addr]=ddf21	;
+df22[addr]=ddf22	;
+df23[addr]=ddf23	;
+df24[addr]=ddf24	;
+df25[addr]=ddf25	;
+df26[addr]=ddf26	;
+df27[addr]=ddf27	;
+df28[addr]=ddf28	;
+df29[addr]=ddf29	;
+df30[addr]=ddf30	;
+df31[addr]=ddf31	;
+end
+
+if	(V(cs)>1.6 && V(write)<0.2)	begin
+V(ccout0) <+ dc0[addr]	;
+V(ccout1) <+ dc1[addr]	;
+V(ccout2) <+ dc2[addr]	;
+V(ccout3) <+ dc3[addr]	;
+V(ccout4) <+ dc4[addr]	;
+V(ccout5) <+ dc5[addr]	;
+V(ccout6) <+ dc6[addr]	;
+V(ccout7) <+ dc7[addr]	;
+V(ccout8) <+ dc8[addr]	;
+V(ccout9) <+ dc9[addr]	;
+V(ccout10) <+ dc10[addr]	;
+V(ccout11) <+ dc11[addr]	;
+V(ccout12) <+ dc12[addr]	;
+V(ccout13) <+ dc13[addr]	;
+V(ccout14) <+ dc14[addr]	;
+V(ccout15) <+ dc15[addr]	;
+V(ccout16) <+ dc16[addr]	;
+V(ccout17) <+ dc17[addr]	;
+V(ccout18) <+ dc18[addr]	;
+V(ccout19) <+ dc19[addr]	;
+V(ccout20) <+ dc20[addr]	;
+V(ccout21) <+ dc21[addr]	;
+V(ccout22) <+ dc22[addr]	;
+V(ccout23) <+ dc23[addr]	;
+V(ccout24) <+ dc24[addr]	;
+V(ccout25) <+ dc25[addr]	;
+V(ccout26) <+ dc26[addr]	;
+V(ccout27) <+ dc27[addr]	;
+V(ccout28) <+ dc28[addr]	;
+V(ccout29) <+ dc29[addr]	;
+V(ccout30) <+ dc30[addr]	;
+V(ccout31) <+ dc31[addr]	;
+
+V(ffout0) <+ df0[addr]	;
+V(ffout1) <+ df1[addr]	;
+V(ffout2) <+ df2[addr]	;
+V(ffout3) <+ df3[addr]	;
+V(ffout4) <+ df4[addr]	;
+V(ffout5) <+ df5[addr]	;
+V(ffout6) <+ df6[addr]	;
+V(ffout7) <+ df7[addr]	;
+V(ffout8) <+ df8[addr]	;
+V(ffout9) <+ df9[addr]	;
+V(ffout10) <+ df10[addr]	;
+V(ffout11) <+ df11[addr]	;
+V(ffout12) <+ df12[addr]	;
+V(ffout13) <+ df13[addr]	;
+V(ffout14) <+ df14[addr]	;
+V(ffout15) <+ df15[addr]	;
+V(ffout16) <+ df16[addr]	;
+V(ffout17) <+ df17[addr]	;
+V(ffout18) <+ df18[addr]	;
+V(ffout19) <+ df19[addr]	;
+V(ffout20) <+ df20[addr]	;
+V(ffout21) <+ df21[addr]	;
+V(ffout22) <+ df22[addr]	;
+V(ffout23) <+ df23[addr]	;
+V(ffout24) <+ df24[addr]	;
+V(ffout25) <+ df25[addr]	;
+V(ffout26) <+ df26[addr]	;
+V(ffout27) <+ df27[addr]	;
+V(ffout28) <+ df28[addr]	;
+V(ffout29) <+ df29[addr]	;
+V(ffout30) <+ df30[addr]	;
+V(ffout31) <+ df31[addr]	;
+
+end
+
+V(cout0) <+ absdelay(V(ccout0),450p)	;
+V(cout1) <+ absdelay(V(ccout1),450p)	;
+V(cout2) <+ absdelay(V(ccout2),450p)	;
+V(cout3) <+ absdelay(V(ccout3),450p)	;
+V(cout4) <+ absdelay(V(ccout4),450p)	;
+V(cout5) <+ absdelay(V(ccout5),450p)	;
+V(cout6) <+ absdelay(V(ccout6),450p)	;
+V(cout7) <+ absdelay(V(ccout7),450p)	;
+V(cout8) <+ absdelay(V(ccout8),450p)	;
+V(cout9) <+ absdelay(V(ccout9),450p)	;
+V(cout10) <+ absdelay(V(ccout10),450p)	;
+V(cout11) <+ absdelay(V(ccout11),450p)	;
+V(cout12) <+ absdelay(V(ccout12),450p)	;
+V(cout13) <+ absdelay(V(ccout13),450p)	;
+V(cout14) <+ absdelay(V(ccout14),450p)	;
+V(cout15) <+ absdelay(V(ccout15),450p)	;
+V(cout16) <+ absdelay(V(ccout16),450p)	;
+V(cout17) <+ absdelay(V(ccout17),450p)	;
+V(cout18) <+ absdelay(V(ccout18),450p)	;
+V(cout19) <+ absdelay(V(ccout19),450p)	;
+V(cout20) <+ absdelay(V(ccout20),450p)	;
+V(cout21) <+ absdelay(V(ccout21),450p)	;
+V(cout22) <+ absdelay(V(ccout22),450p)	;
+V(cout23) <+ absdelay(V(ccout23),450p)	;
+V(cout24) <+ absdelay(V(ccout24),450p)	;
+V(cout25) <+ absdelay(V(ccout25),450p)	;
+V(cout26) <+ absdelay(V(ccout26),450p)	;
+V(cout27) <+ absdelay(V(ccout27),450p)	;
+V(cout28) <+ absdelay(V(ccout28),450p)	;
+V(cout29) <+ absdelay(V(ccout29),450p)	;
+V(cout30) <+ absdelay(V(ccout30),450p)	;
+V(cout31) <+ absdelay(V(ccout31),450p)	;
+
+V(fout0) <+ absdelay(V(ffout0),450p)	;
+V(fout1) <+ absdelay(V(ffout1),450p)	;
+V(fout2) <+ absdelay(V(ffout2),450p)	;
+V(fout3) <+ absdelay(V(ffout3),450p)	;
+V(fout4) <+ absdelay(V(ffout4),450p)	;
+V(fout5) <+ absdelay(V(ffout5),450p)	;
+V(fout6) <+ absdelay(V(ffout6),450p)	;
+V(fout7) <+ absdelay(V(ffout7),450p)	;
+V(fout8) <+ absdelay(V(ffout8),450p)	;
+V(fout9) <+ absdelay(V(ffout9),450p)	;
+V(fout10) <+ absdelay(V(ffout10),450p)	;
+V(fout11) <+ absdelay(V(ffout11),450p)	;
+V(fout12) <+ absdelay(V(ffout12),450p)	;
+V(fout13) <+ absdelay(V(ffout13),450p)	;
+V(fout14) <+ absdelay(V(ffout14),450p)	;
+V(fout15) <+ absdelay(V(ffout15),450p)	;
+V(fout16) <+ absdelay(V(ffout16),450p)	;
+V(fout17) <+ absdelay(V(ffout17),450p)	;
+V(fout18) <+ absdelay(V(ffout18),450p)	;
+V(fout19) <+ absdelay(V(ffout19),450p)	;
+V(fout20) <+ absdelay(V(ffout20),450p)	;
+V(fout21) <+ absdelay(V(ffout21),450p)	;
+V(fout22) <+ absdelay(V(ffout22),450p)	;
+V(fout23) <+ absdelay(V(ffout23),450p)	;
+V(fout24) <+ absdelay(V(ffout24),450p)	;
+V(fout25) <+ absdelay(V(ffout25),450p)	;
+V(fout26) <+ absdelay(V(ffout26),450p)	;
+V(fout27) <+ absdelay(V(ffout27),450p)	;
+V(fout28) <+ absdelay(V(ffout28),450p)	;
+V(fout29) <+ absdelay(V(ffout29),450p)	;
+V(fout30) <+ absdelay(V(ffout30),450p)	;
+V(fout31) <+ absdelay(V(ffout31),450p)	;
+end
+
+
+endmodule
