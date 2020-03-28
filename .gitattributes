@@ -1,3 +1,10 @@
 docs/* linguist-documentation=true
+
 *.sp linguist-detectable=true
 *.sp linguist-language=SPICE
+
+*.inc linguist-detectable=true
+*.inc linguist-language=SPICE
+
+*.va linguist-detectable=true
+*.va linguist-language=Verilog-A
