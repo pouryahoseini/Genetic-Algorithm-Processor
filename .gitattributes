@@ -7,4 +7,4 @@ docs/* linguist-documentation=true
 *.inc linguist-language=SPICE
 
 *.va linguist-detectable=true
-*.va linguist-language=Verilog-A
+*.va linguist-language=Verilog
