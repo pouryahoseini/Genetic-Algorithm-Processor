@@ -5,13 +5,19 @@ This is a transistor-level digital CMOS implementation of genetic algorithm in 0
 Detailed description of the design and results can be found in our papers: TCYB ([pdf](https://github.com/pouryahoseini/Genetic-Algorithm-Processor/blob/master/docs/2016-TCYB.pdf) or [IEEE Xplore](https://doi.org/10.1109/TCYB.2015.2451595)) and ICECS ([pdf](https://github.com/pouryahoseini/Genetic-Algorithm-Processor/blob/master/docs/2011-ICECS.pdf) or [IEEE Xplore](https://doi.org/10.1109/ICECS.2011.6122355)). The genetic algorithm processor (GAP) is general-purpose, i.e. is not bounded to a specific application. Utilizing speed boosting techniques, such as pipelining, parallel coarse-grained processing, parallel fitness computation, parallel selection of parents, dual-population scheme (our other [work](https://github.com/pouryahoseini/Dual-Population-Genetic-Algorithm)), and support for pipelined fitness computation, the GAP significantly reduces the processing time. Further, through its built-in support of discarding infeasible solutions it may be used in constrained problems. A large search space is achievable by bit string length extension of chromosomes by connecting the 32-bit GAPs. In addition, the GAP supports parallel processing, in which the genetic algorithm’s procedure can be run on several connected processors simultaneously. 
 The following figure shows the input and output connections of the processor:
 <p align="center">
-  <img src="./docs/GAP-Connections.jpg" alt="Connections in the genetic algorithm processor" height=220/>
+  <img src="./docs/GAP-Connections.jpg" alt="Connections in the genetic algorithm processor" height=250/>
 </p>
 
 The genetic algorithm processor can be tuned to the following parameters:
-|Chromosome bit length|Selection method|Mutation method|General purpose|Fitness bit length|Simultaneous selection and replacement|Population size|Crossover method|Coarse-grained parallel processing|Parallel parent selection|Iteration number|Operators for control or online applications|Pipelined fitness computation|Number of possible fitness units|Number of crossover rates|RNG seeds|Parameters adjustable after fabrication|Elitism|Pipelined genetic algorithm|Number of mutation rates|
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-|Unlimited (multi-GAP), Each GAP: 16, 32|Tournament, with 2, 4, 8, or 16 contestants|Uniform, 1-point|Yes|16, 32|Yes, by using dual-population scheme|32, 64, 128, 256|Uniform, 1-point, 2-point|Yes, adjustable|Yes|16, 32, 64, 128, 256, 512, 1024, 2048|Random immigrants, Bad solutions discard|Yes, up to 15 pipeline stages|2|129|16 predefined true random seeds|Yes|Yes|Yes|129|
+|Chromosome bit length|Selection method|Mutation method|General purpose|Fitness bit length|
+|--|--|--|--|--|
+|Unlimited (multi-GAP), Each GAP: 16, 32|Tournament, with 2, 4, 8, or 16 contestants|Uniform, 1-point|Yes|16, 32|
+|**Simultaneous selection and replacement**|**Population size**|**Crossover method**|**Coarse-grained parallel processing**|**Parallel parent selection**|
+|Yes, by using dual-population scheme|32, 64, 128, 256|Uniform, 1-point, 2-point|Yes, adjustable|Yes|
+|**Iteration number**|**Operators for control or online applications**|**Pipelined fitness computation**|**Number of possible fitness units**|**Number of crossover rates**|
+|16, 32, 64, 128, 256, 512, 1024, 2048|Random immigrants, Bad solutions discard|Yes, up to 15 pipeline stages|2|129|
+|**RNG seeds**|**Parameters adjustable after fabrication**|**Elitism**|**Pipelined genetic algorithm**|**Number of mutation rates**|
+|16 predefined true random seeds|Yes|Yes|Yes|129|
 
 In the tests, the GAP has a **speedup of 5391x** over a software counterpart written in C language on 2x2.5 GHz CPU. It is also at least **55** times faster than any other genetic algorithm processor in the literature. The sppedups are obtained while the results are closely identical to serial genetic algorithm on software. Below is an example of the application of genetic algorithm in image enhancement. In the figure, the first column is the original image, the second column is the result after contrast enhancement by the genetic algorithm, and the third column is the result obtained from the hardware version of the genetic algorithm:
 <p align="center">
