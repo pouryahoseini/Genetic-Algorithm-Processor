@@ -10,7 +10,7 @@ The following figure shows the input and output connections of the processor:
 
 The genetic algorithm processor can be tuned to the following parameters:
 |Chromosome bit length|Selection method|Mutation method|General purpose|Fitness bit length|
-|--|--|--|--|--|
+|:--:|:--:|:--:|:--:|:--:|
 |Unlimited (multi-GAP), Each GAP: 16, 32|Tournament, with 2, 4, 8, or 16 contestants|Uniform, 1-point|Yes|16, 32|
 |**Simultaneous selection and replacement**|**Population size**|**Crossover method**|**Coarse-grained parallel processing**|**Parallel parent selection**|
 |Yes, by using dual-population scheme|32, 64, 128, 256|Uniform, 1-point, 2-point|Yes, adjustable|Yes|
