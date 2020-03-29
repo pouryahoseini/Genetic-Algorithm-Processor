@@ -5,7 +5,7 @@ This is a transistor-level digital CMOS implementation of genetic algorithm in 0
 Detailed description of the design and results can be found in our papers: TCYB ([pdf](https://github.com/pouryahoseini/Genetic-Algorithm-Processor/blob/master/docs/2016-TCYB.pdf) or [IEEE Xplore](https://doi.org/10.1109/TCYB.2015.2451595)) and ICECS ([pdf](https://github.com/pouryahoseini/Genetic-Algorithm-Processor/blob/master/docs/2011-ICECS.pdf) or [IEEE Xplore](https://doi.org/10.1109/ICECS.2011.6122355)). The genetic algorithm processor (GAP) is general-purpose, i.e. is not bounded to a specific application. Utilizing speed boosting techniques, such as pipelining, parallel coarse-grained processing, parallel fitness computation, parallel selection of parents, dual-population scheme (our other [work](https://github.com/pouryahoseini/Dual-Population-Genetic-Algorithm)), and support for pipelined fitness computation, the GAP significantly reduces the processing time. Further, through its built-in support of discarding infeasible solutions it may be used in constrained problems. A large search space is achievable by bit string length extension of chromosomes by connecting the 32-bit GAPs. In addition, the GAP supports parallel processing, in which the genetic algorithm’s procedure can be run on several connected processors simultaneously. 
 The following figure shows the input and output connections of the processor:
 <p align="center">
-  <img src="./docs/GAP-Connections.jpg" alt="Connections in the genetic algorithm processor" height=250/>
+  <img src="./docs/GAP-Connections.jpg" alt="Connections in the genetic algorithm processor" height=280/>
 </p>
 
 The genetic algorithm processor can be tuned to the following parameters:
