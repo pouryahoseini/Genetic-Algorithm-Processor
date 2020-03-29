@@ -19,7 +19,7 @@ The genetic algorithm processor can be tuned to the following parameters:
 |**RNG seeds**|**Parameters adjustable after fabrication**|**Elitism**|**Pipelined genetic algorithm**|**Number of mutation rates**|
 |16 predefined true random seeds|Yes|Yes|Yes|129|
 
-In the tests, the GAP has a **speedup of 5391x** over a software counterpart written in C language on 2x2.5 GHz CPU. It is also at least **55** times faster than any other genetic algorithm processor in the literature. The sppedups are obtained while the results are closely identical to serial genetic algorithm on software. Below is an example of the application of genetic algorithm in image enhancement. In the figure, the first column is the original image, the second column is the result after contrast enhancement by the genetic algorithm, and the third column is the result obtained from the hardware version of the genetic algorithm:
+In the tests, the GAP has a **speedup of 5391x** over a software counterpart written in C language and on a 2x2.5 GHz CPU. It is also at least **55** times faster than any other genetic algorithm processor in the literature. The sppedups are obtained while the results are closely identical to serial genetic algorithm on software. Below is an example of the application of the genetic algorithm processor in image enhancement:
 <p align="center">
   <img src="./docs/example-application.jpg" alt="Application of the genetic algorithm processor in image enhancement" height=220/>
   <br>
