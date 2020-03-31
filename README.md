@@ -55,5 +55,8 @@ You may refer to this work by citing our published papers at [IEEE Transacions o
 }
 ```
 
+# Developers
+[Pourya Hoseini](https://github.com/pouryahoseini)
+
 # Contact
 I can be reached at hoseini@nevada.unr.edu.
